@@ -13,16 +13,13 @@ public class LookAndMove : MonoBehaviour
     private float lookSpeed = 2.0f;
     [SerializeField]
     private float lookXLimit = 45.0f;
-    float rotationX = 0;
+    public float rotationX = 0;
 
     public bool canMove = true;
     Camera playerCamera;
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
 
-    //Eventueel running en jumping speed
-    //public float runningSpeed = 11.5f;
-    //public float jumpSpeed = 8.0f;
 
     void Start()
     {
@@ -53,6 +50,15 @@ public class LookAndMove : MonoBehaviour
             moveDirection.y = 0;
         }
 
+        if (!canMove)
+        {
+            //Debug.Log(this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).shortNameHash);
+            if (!this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Window"))
+            {
+
+                canMove = true;
+            }
+        }
         characterController.Move(moveDirection * Time.deltaTime);
         if (canMove)
         {
@@ -61,25 +67,5 @@ public class LookAndMove : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
-
-        // Running shortcut
-            //bool isRunning = Input.GetKey(KeyCode.LeftShift);
-
-        //Als kan bewegen dan (dit stuk) anders 0 als running dan runningspeed en anders walking speed
-        //if someone would look at the code :p 
-
-        //Eventueel met running speed
-            //float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Vertical") : 0;
-            //float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * Input.GetAxis("Horizontal") : 0;
-
-        //Jump part disabled
-            //if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
-            //{
-            //    moveDirection.y = jumpSpeed;
-            //}
-            //else
-            //{
-            //    moveDirection.y = movementDirectionY;
-            //}
     }
 }

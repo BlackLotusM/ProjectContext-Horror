@@ -4,106 +4,35 @@ using UnityEngine;
 
 public class LeverScript : MonoBehaviour
 {
-    public GameObject player;
+    public LookAndMove getval;
+    public float oldMouse;
 
-    private float deltaY;
-    private float deltaY2;
-    private float force;
-
-    public onclick obj1;
-    public onclick obj2;
-
-    public Light light;
-
-    public float forceModifier;
-    public float rotation;
-    private void OnMouseDown()
+    void OnMouseDown()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) <= 6.2f)
-        {
-            deltaY = (Camera.main.transform.position.y + Camera.main.transform.forward.y);
-        }
+        oldMouse = getval.rotationX;
     }
 
-    private void Update()
+    void OnMouseDrag()
     {
-        if (rotation >= 80)
+        oldMouse = getval.rotationX - oldMouse;
+        if (oldMouse < 0)
         {
-            obj1.setActive = true;
-            obj2.setActive = true;
+            if (oldMouse < -5)
+            {
+                oldMouse = -5;
+            }
 
-            light.intensity = 1;
+            transform.Rotate(new Vector3(0, oldMouse * 4, 0) * 8 * Time.deltaTime);
         }
-        else
+
+        if (oldMouse > 0)
         {
-            obj1.setActive = false;
-            obj2.setActive = false;
-
-            light.intensity = 0;
+            if (oldMouse > 5)
+            {
+                oldMouse = 5;
+            }
+            transform.Rotate(new Vector3(0, oldMouse * 4, 0) * 8 * Time.deltaTime);
         }
-    }
-    private void OnMouseDrag()
-    {
-        if (Vector3.Distance(transform.position, player.transform.position) <= 6.01f)
-        {
-            deltaY2 = (Camera.main.transform.position.y + Camera.main.transform.forward.y);
-            force = (deltaY - deltaY2) * forceModifier;
 
-            if (force > 0)
-            {
-                if (rotation >= 90)
-                {
-                    Debug.Log("test1");
-                }
-                else
-                {
-                    rotation += force;
-                    transform.eulerAngles = new Vector3(
-                            rotation,
-                            transform.eulerAngles.y,
-                            transform.eulerAngles.z
-                        );
-                }
-            }
-            else
-            {
-                if (force < 0)
-                {
-                    if (rotation <= 0)
-                    {
-                        Debug.Log("test2");
-                    }
-                    else
-                    {
-                        rotation += force;
-                        transform.eulerAngles = new Vector3(
-                            rotation,
-                            transform.eulerAngles.y,
-                            transform.eulerAngles.z
-                        );
-                    }
-                }
-            }
-
-            if (rotation < 0)
-            {
-                rotation = 0;
-                transform.eulerAngles = new Vector3(
-                            rotation,
-                            transform.eulerAngles.y,
-                            transform.eulerAngles.z
-                        );
-            }
-
-            if (rotation > 90)
-            {
-                rotation = 90;
-                transform.eulerAngles = new Vector3(
-                            rotation,
-                            transform.eulerAngles.y,
-                            transform.eulerAngles.z
-                        );
-            }
-        }
     }
 }

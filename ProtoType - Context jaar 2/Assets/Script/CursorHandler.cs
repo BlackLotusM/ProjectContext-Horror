@@ -51,7 +51,6 @@ public class CursorHandler : MonoBehaviour
                     hit.collider.gameObject.CompareTag(dat.TriggerTag))
             {
                 target.sprite = dat.CursorImage;
-                Debug.LogWarning(dat.TriggerTag);
             }
         }
     }

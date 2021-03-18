@@ -12,11 +12,9 @@ public class BecomeActiveWhenClose : MonoBehaviour
     {
         if (Vector3.Distance(Player.transform.position, this.transform.position) < distance)
         {
-           // this.gameObject.GetComponent<MeshRenderer>().enabled = true;
             closeEnough = true;
         }
         else {
-            //this.gameObject.GetComponent<MeshRenderer>().enabled = false;
             closeEnough = false;
         }
 
@@ -36,11 +34,6 @@ public class BecomeActiveWhenClose : MonoBehaviour
                     Player.GetComponent<Animator>().Play("Window");
                 }
             }
-
-            //if (this.gameObject.GetComponent<MeshRenderer>().enabled == true)
-            //{
-            //    Player.GetComponent<Animator>().Play("Climb");
-            //}
         }
     }
 }

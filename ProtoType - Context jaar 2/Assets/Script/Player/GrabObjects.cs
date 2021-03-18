@@ -37,7 +37,15 @@ public class GrabObjects : MonoBehaviour
             Vector3 heading = ((Camera.main.transform.position + Camera.main.transform.forward * offset) - transform.position);
             if (rb.velocity.magnitude < 10)
             {
-                rb.AddForce(heading * Speed * Time.deltaTime);
+                if(transform.position.y > 0.8f)
+                {
+                    Vector3 temp = new Vector3(heading.x, transform.position.y, heading.z);
+                    rb.AddForce(temp * Speed * Time.deltaTime);
+                }
+                else
+                {
+                    rb.AddForce(heading * Speed * Time.deltaTime);
+                }
             }
         }
         else

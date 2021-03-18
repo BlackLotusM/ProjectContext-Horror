@@ -15,13 +15,15 @@ public class moveTo : MonoBehaviour
         {
             Physics.IgnoreCollision(this.GetComponent<BoxCollider>(), doors[i]);
         }
-        
-        this.GetComponent<NavMeshAgent>().SetDestination(target.transform.position);
+
+        try
+        {
+            this.GetComponent<NavMeshAgent>().SetDestination(target.transform.position);
+        }
+        catch
+        {
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //this.
-    }
 }

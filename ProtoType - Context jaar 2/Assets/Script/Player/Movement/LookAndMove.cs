@@ -52,13 +52,13 @@ public class LookAndMove : MonoBehaviour
 
         if (!canMove)
         {
-            //Debug.Log(this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).shortNameHash);
-            if (!this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Window"))
+            if (this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Default"))
             {
-
-                canMove = true;
+                canMove = false;
             }
         }
+
+
         characterController.Move(moveDirection * Time.deltaTime);
         if (canMove)
         {

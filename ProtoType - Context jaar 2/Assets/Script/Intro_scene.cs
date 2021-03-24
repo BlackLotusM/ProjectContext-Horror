@@ -53,7 +53,7 @@ public class Intro_scene : MonoBehaviour
                     if (current == 1)
                     {
                         SoundPlay1();
-                        StartCoroutine(FadeToImage(0.76f, 1.0f, backLight));
+                        //StartCoroutine(FadeToImage(0.76f, 1.0f, backLight));
                     }
                     else if (current == 2)
                     {

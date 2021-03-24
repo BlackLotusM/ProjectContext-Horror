@@ -18,6 +18,11 @@ public class uiManager : MonoBehaviour
         windowToOpen.SetActive(true);
     }
 
+    public void goToMain()
+    {
+        SceneManager.LoadScene("MenuTestScene");
+    }
+
     public void start(string s)
     {
         SceneManager.LoadScene(s);

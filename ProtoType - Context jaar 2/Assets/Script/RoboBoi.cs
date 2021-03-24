@@ -19,6 +19,14 @@ public class RoboBoi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+        if (Vector3.Distance(player.transform.position, this.transform.position) < 1.8f)
+        {
+            this.GetComponent<NavMeshAgent>().ResetPath();
+        }
+        else
+        {
+            this.GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+        }
+        this.transform.LookAt(player.transform.position);
     }
 }

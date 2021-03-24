@@ -7,15 +7,18 @@ public class BecomeActiveWhenClose : MonoBehaviour
     public GameObject Player;
     public float distance;
     public bool closeEnough;
+    public CursorHandler ch;
 
     private void Update()
     {
         if (Vector3.Distance(Player.transform.position, this.transform.position) < distance)
         {
             closeEnough = true;
+            
         }
         else {
             closeEnough = false;
+            //ch.canJump = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -33,6 +36,7 @@ public class BecomeActiveWhenClose : MonoBehaviour
                 {
                     Player.GetComponent<Animator>().Play("Window");
                 }
+
             }
         }
     }

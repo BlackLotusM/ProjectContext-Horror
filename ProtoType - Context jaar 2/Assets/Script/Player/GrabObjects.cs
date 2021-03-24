@@ -25,7 +25,6 @@ public class GrabObjects : MonoBehaviour
     void OnMouseDown()
     {
         grabbed = true;
-        Debug.Log("Click");
     }
 
     

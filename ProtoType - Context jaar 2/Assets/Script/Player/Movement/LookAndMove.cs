@@ -15,7 +15,9 @@ public class LookAndMove : MonoBehaviour
     private float lookXLimit = 45.0f;
     public float rotationX = 0;
 
-    public bool canMove = true;
+    public RoomFix rf;
+
+    public bool canMove; //= true;
     Camera playerCamera;
     CharacterController characterController;
     Vector3 moveDirection = Vector3.zero;
@@ -29,8 +31,27 @@ public class LookAndMove : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public IEnumerator startPowerOutage()
+    {
+        yield return new WaitForSeconds(2);
+        rf.powerDown.Play();
+        rf.mannager.level++;
+        rf.startActive = false;
+    }
+
+    public void canMoveset()
+    {
+        canMove = true;
+    }
+
+    public void cantMoveset()
+    {
+        canMove = false;
+    }
+
+
     void Update()
-    {      
+    {  
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
@@ -49,15 +70,6 @@ public class LookAndMove : MonoBehaviour
         {
             moveDirection.y = 0;
         }
-
-        if (!canMove)
-        {
-            if (this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Default"))
-            {
-                canMove = false;
-            }
-        }
-
 
         characterController.Move(moveDirection * Time.deltaTime);
         if (canMove)
